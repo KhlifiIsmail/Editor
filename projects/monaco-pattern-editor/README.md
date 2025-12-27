@@ -1,63 +1,79 @@
-# MonacoPatternEditor
+# Monaco Pattern Editor
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+A premium Angular library that wraps Monaco Editor (VS Code's editor) with beautiful themes, pattern detection UI, and coding interview preparation features.
 
-## Code scaffolding
+## Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+✨ **Premium Monaco Themes** - 9 carefully crafted themes for dark and light modes
+🎨 **Smooth Animations** - Apple-inspired smooth transitions and effects
+🎯 **Pattern Detection UI** - Visual feedback for coding patterns
+📊 **Complexity Analysis** - Big-O notation badges
+💡 **Progressive Hints** - Multi-level hint system
+✅ **Test Results** - Beautiful test execution results panel
+🌓 **Dark/Light Mode** - Full theme switching support
+📦 **Standalone Components** - Works with Angular standalone apps
+🚀 **Zero Configuration** - Works out of the box
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+## Installation
 
 ```bash
-ng build monaco-pattern-editor
+npm install monaco-pattern-editor
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Quick Start
 
-### Publishing the Library
+```typescript
+import { Component } from '@angular/core';
+import { MonacoEditorComponent } from 'monaco-pattern-editor';
 
-Once the project is built, you can publish your library by following these steps:
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [MonacoEditorComponent],
+  template: `
+    <mpe-monaco-editor
+      [language]="'javascript'"
+      [initialCode]="code"
+      [theme]="'obsidian-warmth'"
+      [height]="'600px'"
+      (codeChange)="onCodeChange($event)">
+    </mpe-monaco-editor>
+  `
+})
+export class AppComponent {
+  code = 'console.log("Hello World!");';
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/monaco-pattern-editor
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+  onCodeChange(newCode: string) {
+    console.log('Code changed:', newCode);
+  }
+}
 ```
 
-## Running end-to-end tests
+Add global styles in your `styles.scss`:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```scss
+@import 'monaco-pattern-editor/styles/theme.scss';
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Themes
 
-## Additional Resources
+### Dark Themes
+- **Obsidian Warmth Dark** - Warm, cozy dark theme (default)
+- **Catppuccin Mocha** - Pastel dark theme with warm colors
+- **Dracula** - Vibrant purple dark theme
+- **Nord** - Arctic, north-bluish color palette
+- **Tokyo Night** - Neon-inspired dark theme
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Light Themes
+- **Obsidian Warmth Light** - Warm light variant
+- **Catppuccin Latte** - Soothing light theme with pastels
+- **GitHub Light** - Clean, professional light theme
+- **Rosé Pine Dawn** - Elegant low-contrast light theme
+
+## Documentation
+
+Full documentation available at: [https://github.com/yourusername/monaco-pattern-editor](https://github.com/yourusername/monaco-pattern-editor)
+
+## License
+
+MIT © Ismail

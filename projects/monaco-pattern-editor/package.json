@@ -1,12 +1,47 @@
 {
   "name": "monaco-pattern-editor",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "A premium Angular library that wraps Monaco Editor with beautiful themes, pattern detection UI, and coding interview preparation features",
+  "keywords": [
+    "angular",
+    "monaco",
+    "monaco-editor",
+    "code-editor",
+    "syntax-highlighting",
+    "themes",
+    "coding-interview",
+    "leetcode",
+    "pattern-detection",
+    "catppuccin",
+    "dracula",
+    "nord",
+    "tokyo-night",
+    "rose-pine"
+  ],
+  "author": {
+    "name": "Ismail",
+    "email": "your.email@example.com",
+    "url": "https://github.com/yourusername"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/monaco-pattern-editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/monaco-pattern-editor/issues"
+  },
+  "homepage": "https://github.com/yourusername/monaco-pattern-editor#readme",
   "peerDependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0"
+    "@angular/common": "^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
+    "@angular/core": "^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
 }
