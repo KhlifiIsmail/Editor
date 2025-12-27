@@ -6,27 +6,17 @@
 .monaco-editor-wrapper {
   position: relative;
   width: 100%;
-  border-radius: var(--mpe-radius-md);
-  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: var(--mpe-color-bg-secondary);
-  box-shadow: var(--mpe-elevation-3);
-  transition: box-shadow var(--mpe-duration-standard) var(--mpe-ease-smooth);
-
-  // Subtle hover effect
-  &:hover {
-    box-shadow: var(--mpe-elevation-4);
-  }
-
-  // Premium focus glow
-  &:focus-within {
-    box-shadow: 0 0 0 3px var(--mpe-color-pattern-glow),
-                var(--mpe-elevation-4);
-  }
 }
 
 .editor-container {
   width: 100%;
+  height: 100%;
   position: relative;
+  flex: 1;
 
   // Ensure Monaco renders properly
   :host ::ng-deep {
