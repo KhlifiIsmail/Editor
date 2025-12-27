@@ -1,0 +1,78 @@
+<div class="test-results-panel">
+  <!-- Header -->
+  <div class="test-results-header">
+    <h3 class="test-results-title">Test Results</h3>
+    <div class="test-results-summary" *ngIf="result && !loading">
+      <span class="passed-count" *ngIf="result.passedCount > 0">
+        ✓ {{ result.passedCount }} passed
+      </span>
+      <span class="failed-count" *ngIf="result.failedCount > 0">
+        ✗ {{ result.failedCount }} failed
+      </span>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="test-results-loading" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <span>Running tests...</span>
+  </div>
+
+  <!-- Results List -->
+  <div class="test-results-list" *ngIf="result && !loading">
+    <div
+      *ngFor="let test of result.results; let i = index; trackBy: trackByTestId"
+      class="test-result-item"
+      [class.passed]="test.passed"
+      [class.failed]="!test.passed"
+      [style.animation-delay]="i * 100 + 'ms'">
+
+      <!-- Status Icon -->
+      <div class="test-status-icon">
+        <span *ngIf="test.passed" class="icon-pass">✓</span>
+        <span *ngIf="!test.passed" class="icon-fail">✗</span>
+      </div>
+
+      <!-- Test Info -->
+      <div class="test-info">
+        <div class="test-input">
+          <span class="test-label">Input:</span>
+          <code>{{ test.input }}</code>
+        </div>
+
+        <div class="test-output">
+          <span class="test-label">Expected:</span>
+          <code class="expected">{{ test.expected }}</code>
+          <span class="test-label">Got:</span>
+          <code class="actual" [class.error]="!test.passed">{{ test.actual }}</code>
+        </div>
+
+        <!-- Error Message -->
+        <div class="test-error" *ngIf="test.errorMessage">
+          <span class="error-icon">⚠</span>
+          {{ test.errorMessage }}
+        </div>
+
+        <!-- Performance Stats -->
+        <div class="test-stats" *ngIf="test.executionTime || test.memoryUsed">
+          <span *ngIf="test.executionTime" class="stat">
+            ⏱ {{ test.executionTime }}ms
+          </span>
+          <span *ngIf="test.memoryUsed" class="stat">
+            💾 {{ test.memoryUsed }}MB
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Console Output -->
+  <div class="console-output" *ngIf="result?.consoleOutput && result.consoleOutput.length > 0">
+    <div class="console-header">Console</div>
+    <div class="console-content">
+      <div *ngFor="let line of result.consoleOutput" class="console-line">
+        {{ line }}
+      </div>
+    </div>
+  </div>
+</div>
