@@ -368,7 +368,7 @@ The library uses CSS custom properties for theming. You can override them:
 Check out the demo app in the repository:
 
 ```bash
-git clone https://github.com/yourusername/monaco-pattern-editor.git
+git clone https://github.com/KhlifiIsmail/monaco-pattern-editor.git
 cd monaco-pattern-editor
 npm install
 ng serve demo
@@ -392,7 +392,7 @@ MIT License - see LICENSE file for details
 
 ## Author
 
-**Ismail** - [GitHub Profile](https://github.com/yourusername)
+**Ismail Khlifi** - [GitHub Profile](https://github.com/KhlifiIsmail)
 
 ## Acknowledgments
 
@@ -402,9 +402,9 @@ MIT License - see LICENSE file for details
 
 ## Support
 
-- 🐛 [Report Bug](https://github.com/yourusername/monaco-pattern-editor/issues)
-- 💡 [Request Feature](https://github.com/yourusername/monaco-pattern-editor/issues)
-- 📧 [Contact](mailto:your.email@example.com)
+- 🐛 [Report Bug](https://github.com/KhlifiIsmail/monaco-pattern-editor/issues)
+- 💡 [Request Feature](https://github.com/KhlifiIsmail/monaco-pattern-editor/issues)
+- 📧 [Contact](mailto:ismail.khliffi@gmail.com)
 
 ---
 

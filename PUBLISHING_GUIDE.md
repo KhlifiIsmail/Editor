@@ -37,18 +37,18 @@ Edit `projects/monaco-pattern-editor/package.json` and update:
 ```json
 {
   "author": {
-    "name": "Your Name",
-    "email": "your.email@example.com",
-    "url": "https://github.com/yourusername"
+    "name": "Ismail Khlifi",
+    "email": "ismail.khliffi@gmail.com",
+    "url": "https://github.com/KhlifiIsmail"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/monaco-pattern-editor.git"
+    "url": "https://github.com/KhlifiIsmail/monaco-pattern-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/monaco-pattern-editor/issues"
+    "url": "https://github.com/KhlifiIsmail/monaco-pattern-editor/issues"
   },
-  "homepage": "https://github.com/yourusername/monaco-pattern-editor#readme"
+  "homepage": "https://github.com/KhlifiIsmail/monaco-pattern-editor#readme"
 }
 ```
 
@@ -65,17 +65,15 @@ If the name is taken, you'll need to:
 For scoped packages, update package.json:
 ```json
 {
-  "name": "@yourusername/monaco-pattern-editor"
+  "name": "@KhlifiIsmail/monaco-pattern-editor"
 }
 ```
 
 ### 3. Update README Links
 
-Update all GitHub URLs in:
+All GitHub URLs have been updated to use the KhlifiIsmail username in:
 - `README.md` (root)
 - `projects/monaco-pattern-editor/README.md`
-
-Replace `yourusername` with your actual GitHub username.
 
 ### 4. Create GitHub Repository
 
@@ -88,7 +86,7 @@ git init
 git add .
 git commit -m "feat: initial release of monaco-pattern-editor v1.0.0"
 git branch -M main
-git remote add origin https://github.com/yourusername/monaco-pattern-editor.git
+git remote add origin https://github.com/KhlifiIsmail/monaco-pattern-editor.git
 git push -u origin main
 ```
 
@@ -140,7 +138,7 @@ cd dist/monaco-pattern-editor
 # Publish (public package)
 npm publish --access public
 
-# If using scoped package (@yourusername/monaco-pattern-editor)
+# If using scoped package (@KhlifiIsmail/monaco-pattern-editor)
 npm publish --access public
 ```
 
@@ -195,7 +193,7 @@ git push origin v1.0.0
 npm install monaco-pattern-editor
 \`\`\`
 
-See [README](https://github.com/yourusername/monaco-pattern-editor#readme) for documentation.
+See [README](https://github.com/KhlifiIsmail/monaco-pattern-editor#readme) for documentation.
 ```
 
 ### 3. Share Your Library
@@ -258,7 +256,7 @@ Create `CHANGELOG.md` in project root:
 
 ```bash
 # Use a scoped package
-# Update package.json name to: "@yourusername/monaco-pattern-editor"
+# Update package.json name to: "@KhlifiIsmail/monaco-pattern-editor"
 npm publish --access public
 ```
 

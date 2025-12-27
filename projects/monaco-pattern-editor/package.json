@@ -19,19 +19,19 @@
     "rose-pine"
   ],
   "author": {
-    "name": "Ismail",
-    "email": "your.email@example.com",
-    "url": "https://github.com/yourusername"
+    "name": "Ismail Khlifi",
+    "email": "ismail.khliffi@gmail.com",
+    "url": "https://github.com/KhlifiIsmail"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/monaco-pattern-editor.git"
+    "url": "https://github.com/KhlifiIsmail/monaco-pattern-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/monaco-pattern-editor/issues"
+    "url": "https://github.com/KhlifiIsmail/monaco-pattern-editor/issues"
   },
-  "homepage": "https://github.com/yourusername/monaco-pattern-editor#readme",
+  "homepage": "https://github.com/KhlifiIsmail/monaco-pattern-editor#readme",
   "peerDependencies": {
     "@angular/common": "^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
     "@angular/core": "^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0"

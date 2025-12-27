@@ -72,8 +72,8 @@ Add global styles in your `styles.scss`:
 
 ## Documentation
 
-Full documentation available at: [https://github.com/yourusername/monaco-pattern-editor](https://github.com/yourusername/monaco-pattern-editor)
+Full documentation available at: [https://github.com/KhlifiIsmail/monaco-pattern-editor](https://github.com/KhlifiIsmail/monaco-pattern-editor)
 
 ## License
 
-MIT © Ismail
+MIT © Ismail Khlifi
