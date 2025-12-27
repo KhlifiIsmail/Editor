@@ -30,9 +30,9 @@ npm whoami
 
 ## Before Publishing
 
-### 1. Update Package Metadata
+### 1. Package Metadata ✅
 
-Edit `projects/monaco-pattern-editor/package.json` and update:
+All metadata has been updated in `projects/monaco-pattern-editor/package.json`:
 
 ```json
 {
@@ -43,12 +43,12 @@ Edit `projects/monaco-pattern-editor/package.json` and update:
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KhlifiIsmail/monaco-pattern-editor.git"
+    "url": "https://github.com/KhlifiIsmail/Editor.git"
   },
   "bugs": {
-    "url": "https://github.com/KhlifiIsmail/monaco-pattern-editor/issues"
+    "url": "https://github.com/KhlifiIsmail/Editor/issues"
   },
-  "homepage": "https://github.com/KhlifiIsmail/monaco-pattern-editor#readme"
+  "homepage": "https://github.com/KhlifiIsmail/Editor#readme"
 }
 ```
 
@@ -60,7 +60,7 @@ npm search monaco-pattern-editor
 
 If the name is taken, you'll need to:
 1. Change the name in `projects/monaco-pattern-editor/package.json`
-2. Or use a scoped package: `@yourusername/monaco-pattern-editor`
+2. Or use a scoped package: `@KhlifiIsmail/monaco-pattern-editor`
 
 For scoped packages, update package.json:
 ```json
@@ -69,25 +69,20 @@ For scoped packages, update package.json:
 }
 ```
 
-### 3. Update README Links
+### 3. GitHub Repository ✅
 
-All GitHub URLs have been updated to use the KhlifiIsmail username in:
-- `README.md` (root)
-- `projects/monaco-pattern-editor/README.md`
+Your code is already on GitHub at: **https://github.com/KhlifiIsmail/Editor**
 
-### 4. Create GitHub Repository
+The NPM package name (`monaco-pattern-editor`) doesn't have to match the repo name (`Editor`). This is totally fine!
 
-1. Go to GitHub and create a new repository
-2. Name it `monaco-pattern-editor`
-3. Initialize your local repo:
+### 4. Final Commit Before Publishing
+
+Make sure all your latest changes are committed and pushed:
 
 ```bash
-git init
 git add .
-git commit -m "feat: initial release of monaco-pattern-editor v1.0.0"
-git branch -M main
-git remote add origin https://github.com/KhlifiIsmail/monaco-pattern-editor.git
-git push -u origin main
+git commit -m "chore: prepare v1.0.0 for NPM release"
+git push origin main
 ```
 
 ## Publishing Steps
@@ -193,7 +188,7 @@ git push origin v1.0.0
 npm install monaco-pattern-editor
 \`\`\`
 
-See [README](https://github.com/KhlifiIsmail/monaco-pattern-editor#readme) for documentation.
+See [README](https://github.com/KhlifiIsmail/Editor#readme) for documentation.
 ```
 
 ### 3. Share Your Library
