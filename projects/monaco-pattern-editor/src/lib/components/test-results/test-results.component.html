@@ -67,7 +67,7 @@
   </div>
 
   <!-- Console Output -->
-  <div class="console-output" *ngIf="result?.consoleOutput && result.consoleOutput.length > 0">
+  <div class="console-output" *ngIf="result && result.consoleOutput && result.consoleOutput.length > 0">
     <div class="console-header">Console</div>
     <div class="console-content">
       <div *ngFor="let line of result.consoleOutput" class="console-line">
