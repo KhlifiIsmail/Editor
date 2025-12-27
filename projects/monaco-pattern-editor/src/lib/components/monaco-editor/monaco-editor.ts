@@ -5,6 +5,8 @@ import {
   EventEmitter,
   AfterViewInit,
   OnDestroy,
+  OnChanges,
+  SimpleChanges,
   ViewChild,
   ElementRef,
   effect,
@@ -18,9 +20,12 @@ import {
   OBSIDIAN_WARMTH_MONACO_LIGHT,
 } from '../../theme/monaco-themes/obsidian-warmth-monaco.theme';
 import { CATPPUCCIN_MOCHA_MONACO } from '../../theme/monaco-themes/catppuccin-mocha.theme';
+import { CATPPUCCIN_LATTE_MONACO } from '../../theme/monaco-themes/catppuccin-latte.theme';
 import { DRACULA_MONACO } from '../../theme/monaco-themes/dracula.theme';
 import { NORD_MONACO } from '../../theme/monaco-themes/nord.theme';
 import { TOKYO_NIGHT_MONACO } from '../../theme/monaco-themes/tokyo-night.theme';
+import { GITHUB_LIGHT_MONACO } from '../../theme/monaco-themes/github-light.theme';
+import { ROSE_PINE_DAWN_MONACO } from '../../theme/monaco-themes/rose-pine-dawn.theme';
 
 // Monaco types
 declare const monaco: any;
@@ -32,7 +37,7 @@ declare const monaco: any;
   templateUrl: './monaco-editor.html',
   styleUrl: './monaco-editor.scss',
 })
-export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
+export class MonacoEditorComponent implements AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('editorContainer', { static: false })
   editorContainer!: ElementRef<HTMLDivElement>;
 
@@ -53,15 +58,23 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
   constructor(private themeService: ThemeService) {
     // React to theme changes
     effect(() => {
-      const mode = this.themeService.currentMode();
+      this.themeService.currentMode();
       if (this.editor) {
-        this.updateEditorTheme(mode);
+        this.updateEditorTheme();
       }
     });
   }
 
   ngAfterViewInit(): void {
     this.loadMonaco();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Handle theme changes
+    if (changes['theme'] && !changes['theme'].firstChange && this.editor) {
+      const themeName = this.getThemeName();
+      monaco.editor.setTheme(themeName);
+    }
   }
 
   ngOnDestroy(): void {
@@ -107,14 +120,19 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
     }
 
     // Define all custom themes
+    // Dark themes
     monaco.editor.defineTheme('obsidian-warmth-dark', OBSIDIAN_WARMTH_MONACO_DARK);
-    monaco.editor.defineTheme('obsidian-warmth-light', OBSIDIAN_WARMTH_MONACO_LIGHT);
     monaco.editor.defineTheme('catppuccin-mocha', CATPPUCCIN_MOCHA_MONACO);
     monaco.editor.defineTheme('dracula', DRACULA_MONACO);
     monaco.editor.defineTheme('nord', NORD_MONACO);
     monaco.editor.defineTheme('tokyo-night', TOKYO_NIGHT_MONACO);
 
-    const mode = this.themeService.currentMode();
+    // Light themes
+    monaco.editor.defineTheme('obsidian-warmth-light', OBSIDIAN_WARMTH_MONACO_LIGHT);
+    monaco.editor.defineTheme('catppuccin-latte', CATPPUCCIN_LATTE_MONACO);
+    monaco.editor.defineTheme('github-light', GITHUB_LIGHT_MONACO);
+    monaco.editor.defineTheme('rose-pine-dawn', ROSE_PINE_DAWN_MONACO);
+
     const themeName = this.getThemeName();
 
     this.editor = monaco.editor.create(this.editorContainer.nativeElement, {
@@ -187,7 +205,7 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
   /**
    * Update editor theme based on current theme mode
    */
-  private updateEditorTheme(mode: 'dark' | 'light'): void {
+  private updateEditorTheme(): void {
     if (this.editor) {
       const themeName = this.getThemeName();
       monaco.editor.setTheme(themeName);
