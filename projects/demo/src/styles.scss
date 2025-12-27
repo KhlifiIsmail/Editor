@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+ * Global Styles for Demo App
+ * Import theme from monaco-pattern-editor library
+ */
+
+// Import library theme styles
+@import '../../monaco-pattern-editor/src/lib/styles/theme.scss';
+
+// Additional global styles
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: var(--mpe-font-ui);
+  background: var(--mpe-color-bg-primary);
+  color: var(--mpe-color-text-primary);
+  overflow-x: hidden;
+}
