@@ -1,125 +1,140 @@
-<div class="demo-app">
-  <!-- Header -->
-  <header class="demo-header">
-    <div class="header-content">
-      <h1 class="demo-title">
+<div class="app-container">
+  <!-- Top Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <h1 class="app-title">
         <span class="title-icon">⚡</span>
         Monaco Pattern Editor
       </h1>
-      <p class="demo-subtitle">Premium Code Editor for AI-Driven Interview Prep</p>
     </div>
 
-    <button class="theme-toggle" (click)="toggleTheme()">
-      {{ themeService.currentMode() === 'dark' ? '☀️' : '🌙' }}
-    </button>
+    <div class="header-right">
+      <button class="theme-toggle" (click)="toggleTheme()">
+        {{ themeService.currentMode() === 'dark' ? '☀️' : '🌙' }}
+      </button>
+    </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="demo-main">
-    <!-- Toolbar -->
-    <div class="toolbar">
-      <button
-        class="toolbar-button primary"
-        (click)="detectPatterns()"
-        [disabled]="isDetecting()">
-        {{ isDetecting() ? 'Detecting...' : '🎯 Detect Patterns' }}
-      </button>
+  <!-- Main Split Layout -->
+  <div class="split-container">
+    <!-- Left Panel: Problem Description -->
+    <div class="left-panel">
+      <div class="panel-header">
+        <h2>Problem</h2>
+      </div>
 
-      <button
-        class="toolbar-button"
-        (click)="analyzeComplexity()">
-        📊 Analyze Complexity
-      </button>
+      <div class="panel-content">
+        <div class="problem-section">
+          <h3>Two Sum</h3>
+          <div class="difficulty easy">Easy</div>
+        </div>
 
-      <button
-        class="toolbar-button"
-        (click)="openHints()">
-        💡 Get Hints
-      </button>
+        <div class="problem-description">
+          <p>
+            Given an array of integers <code>nums</code> and an integer <code>target</code>,
+            return indices of the two numbers such that they add up to <code>target</code>.
+          </p>
+          <p>
+            You may assume that each input would have exactly one solution, and you may not use the same element twice.
+          </p>
+          <p>
+            You can return the answer in any order.
+          </p>
+        </div>
 
-      <button
-        class="toolbar-button success"
-        (click)="executeCode()"
-        [disabled]="isExecuting()">
-        {{ isExecuting() ? 'Running...' : '▶️ Run Tests' }}
-      </button>
+        <div class="examples">
+          <h4>Example 1:</h4>
+          <pre><code>Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].</code></pre>
+
+          <h4>Example 2:</h4>
+          <pre><code>Input: nums = [3,2,4], target = 6
+Output: [1,2]</code></pre>
+        </div>
+
+        <div class="constraints">
+          <h4>Constraints:</h4>
+          <ul>
+            <li>2 ≤ nums.length ≤ 10⁴</li>
+            <li>-10⁹ ≤ nums[i] ≤ 10⁹</li>
+            <li>-10⁹ ≤ target ≤ 10⁹</li>
+          </ul>
+        </div>
+
+        <!-- Detected Patterns Section -->
+        <div class="detected-patterns" *ngIf="detectedPatterns().length > 0">
+          <h4>🎯 Detected Patterns:</h4>
+          <div class="patterns-list">
+            <mpe-pattern-badge
+              *ngFor="let pattern of detectedPatterns()"
+              [pattern]="pattern">
+            </mpe-pattern-badge>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Editor Section -->
-    <div class="editor-section">
-      <!-- Detected Patterns -->
-      <div class="patterns-bar" *ngIf="detectedPatterns().length > 0">
-        <h3 class="section-label">Detected Patterns:</h3>
-        <div class="patterns-list">
-          <mpe-pattern-badge
-            *ngFor="let pattern of detectedPatterns()"
-            [pattern]="pattern">
-          </mpe-pattern-badge>
+    <!-- Right Panel: Editor + Results -->
+    <div class="right-panel">
+      <!-- Toolbar -->
+      <div class="editor-toolbar">
+        <div class="toolbar-left">
+          <span class="language-label">JavaScript</span>
+        </div>
+
+        <div class="toolbar-right">
+          <button
+            class="toolbar-btn"
+            (click)="detectPatterns()"
+            [disabled]="isDetecting()">
+            {{ isDetecting() ? '🔍 Detecting...' : '🎯 Detect Patterns' }}
+          </button>
+
+          <button class="toolbar-btn" (click)="analyzeComplexity()">
+            📊 Complexity
+          </button>
+
+          <button class="toolbar-btn" (click)="openHints()">
+            💡 Hint
+          </button>
+
+          <button
+            class="toolbar-btn run-btn"
+            (click)="executeCode()"
+            [disabled]="isExecuting()">
+            {{ isExecuting() ? '⏳ Running...' : '▶️ Run' }}
+          </button>
         </div>
       </div>
 
-      <!-- Monaco Editor -->
-      <div class="editor-wrapper">
+      <!-- Editor Area -->
+      <div class="editor-area">
         <mpe-monaco-editor
           [language]="'javascript'"
           [initialCode]="initialCode"
-          [height]="'500px'"
+          [height]="'100%'"
           (codeChange)="onCodeChange($event)">
         </mpe-monaco-editor>
 
         <!-- Complexity Badges Overlay -->
-        <div class="complexity-overlay" *ngIf="complexity()">
-          <mpe-complexity-badge
-            [complexity]="complexity()!"
-            [type]="'time'">
+        <div class="complexity-badges" *ngIf="complexity()">
+          <mpe-complexity-badge [complexity]="complexity()!" [type]="'time'">
           </mpe-complexity-badge>
-          <mpe-complexity-badge
-            [complexity]="complexity()!"
-            [type]="'space'">
+          <mpe-complexity-badge [complexity]="complexity()!" [type]="'space'">
           </mpe-complexity-badge>
         </div>
       </div>
-    </div>
 
-    <!-- Test Results Section -->
-    <div class="results-section" *ngIf="testResults() || isExecuting()">
-      <mpe-test-results
-        [result]="testResults()!"
-        [loading]="isExecuting()">
-      </mpe-test-results>
-    </div>
-
-    <!-- Info Section -->
-    <div class="info-section">
-      <div class="info-card">
-        <h3>🚀 About This Demo</h3>
-        <p>
-          This is a demo of the <strong>Monaco Pattern Editor</strong> library.
-          All features are currently using <strong>mocked data</strong> to demonstrate the UI/UX.
-        </p>
-        <ul>
-          <li>✅ Pattern Detection (UI only - fake data)</li>
-          <li>✅ Progressive Hints (UI only - hardcoded)</li>
-          <li>✅ Code Execution (UI only - fake results)</li>
-          <li>✅ Complexity Analysis (UI only - mock values)</li>
-          <li>✅ Premium Theme System (fully functional)</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🎨 Features</h3>
-        <ul>
-          <li>Apple-inspired smooth animations</li>
-          <li>Dark/Light theme toggle</li>
-          <li>Obsidian Warmth color profile</li>
-          <li>JetBrains Mono font with ligatures</li>
-          <li>Accessible design (WCAG AA)</li>
-        </ul>
+      <!-- Test Results Panel (Bottom) -->
+      <div class="results-panel" *ngIf="testResults() || isExecuting()">
+        <mpe-test-results [result]="testResults()!" [loading]="isExecuting()">
+        </mpe-test-results>
       </div>
     </div>
-  </main>
+  </div>
 
-  <!-- Hint Overlay -->
+  <!-- Hint Overlay Modal -->
   <mpe-hint-overlay
     [hints]="hints()"
     [isOpen]="isHintOverlayOpen()"
