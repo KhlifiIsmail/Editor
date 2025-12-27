@@ -1,0 +1,118 @@
+/**
+ * Monaco Pattern Editor - Global Theme Styles
+ * Premium design system with smooth animations
+ */
+
+// Base reset and box-sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Root element - CSS variables are injected by ThemeService
+:root {
+  // Font smoothing for premium look
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Base typography
+body {
+  font-family: var(--mpe-font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--mpe-color-text-primary);
+  background-color: var(--mpe-color-bg-primary);
+}
+
+// Code typography
+code,
+pre {
+  font-family: var(--mpe-font-code);
+  font-variant-ligatures: common-ligatures;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Respect reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Selection styling
+::selection {
+  background-color: var(--mpe-color-accent-primary);
+  color: var(--mpe-color-bg-primary);
+}
+
+// Focus styles for accessibility
+:focus-visible {
+  outline: 2px solid var(--mpe-color-accent-primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+// Utility classes
+.mpe-elevation-1 {
+  box-shadow: var(--mpe-elevation-1);
+}
+
+.mpe-elevation-2 {
+  box-shadow: var(--mpe-elevation-2);
+}
+
+.mpe-elevation-3 {
+  box-shadow: var(--mpe-elevation-3);
+}
+
+.mpe-elevation-4 {
+  box-shadow: var(--mpe-elevation-4);
+}
+
+// Animation utilities
+.mpe-transition-smooth {
+  transition: all var(--mpe-duration-standard) var(--mpe-ease-smooth);
+}
+
+.mpe-transition-quick {
+  transition: all var(--mpe-duration-quick) var(--mpe-ease-smooth);
+}
+
+// Typography utilities
+.mpe-text-primary {
+  color: var(--mpe-color-text-primary);
+}
+
+.mpe-text-secondary {
+  color: var(--mpe-color-text-secondary);
+}
+
+.mpe-text-tertiary {
+  color: var(--mpe-color-text-tertiary);
+}
+
+// Background utilities
+.mpe-bg-primary {
+  background-color: var(--mpe-color-bg-primary);
+}
+
+.mpe-bg-secondary {
+  background-color: var(--mpe-color-bg-secondary);
+}
+
+.mpe-bg-tertiary {
+  background-color: var(--mpe-color-bg-tertiary);
+}
