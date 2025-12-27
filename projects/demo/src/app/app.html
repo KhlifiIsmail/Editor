@@ -3,14 +3,30 @@
   <header class="app-header">
     <div class="header-left">
       <h1 class="app-title">
-        <span class="title-icon">⚡</span>
+        <lucide-icon [img]="icons.Zap" class="title-icon"></lucide-icon>
         Monaco Pattern Editor
       </h1>
     </div>
 
     <div class="header-right">
+      <select
+        class="theme-selector"
+        [value]="selectedTheme()"
+        (change)="onThemeChange($any($event.target).value)">
+        <option *ngFor="let theme of availableThemes" [value]="theme.value">
+          {{ theme.label }}
+        </option>
+      </select>
+
       <button class="theme-toggle" (click)="toggleTheme()">
-        {{ themeService.currentMode() === 'dark' ? '☀️' : '🌙' }}
+        <lucide-icon
+          *ngIf="themeService.currentMode() === 'dark'"
+          [img]="icons.Sun">
+        </lucide-icon>
+        <lucide-icon
+          *ngIf="themeService.currentMode() === 'light'"
+          [img]="icons.Moon">
+        </lucide-icon>
       </button>
     </div>
   </header>
@@ -64,7 +80,10 @@ Output: [1,2]</code></pre>
 
         <!-- Detected Patterns Section -->
         <div class="detected-patterns" *ngIf="detectedPatterns().length > 0">
-          <h4>🎯 Detected Patterns:</h4>
+          <h4>
+            <lucide-icon [img]="icons.Target" [size]="16"></lucide-icon>
+            Detected Patterns:
+          </h4>
           <div class="patterns-list">
             <mpe-pattern-badge
               *ngFor="let pattern of detectedPatterns()"
@@ -88,22 +107,34 @@ Output: [1,2]</code></pre>
             class="toolbar-btn"
             (click)="detectPatterns()"
             [disabled]="isDetecting()">
-            {{ isDetecting() ? '🔍 Detecting...' : '🎯 Detect Patterns' }}
+            <lucide-icon
+              [img]="isDetecting() ? icons.Loader2 : icons.Target"
+              [size]="16"
+              [class.spinning]="isDetecting()">
+            </lucide-icon>
+            {{ isDetecting() ? 'Detecting...' : 'Detect Patterns' }}
           </button>
 
           <button class="toolbar-btn" (click)="analyzeComplexity()">
-            📊 Complexity
+            <lucide-icon [img]="icons.BarChart3" [size]="16"></lucide-icon>
+            Complexity
           </button>
 
           <button class="toolbar-btn" (click)="openHints()">
-            💡 Hint
+            <lucide-icon [img]="icons.Lightbulb" [size]="16"></lucide-icon>
+            Hint
           </button>
 
           <button
             class="toolbar-btn run-btn"
             (click)="executeCode()"
             [disabled]="isExecuting()">
-            {{ isExecuting() ? '⏳ Running...' : '▶️ Run' }}
+            <lucide-icon
+              [img]="isExecuting() ? icons.Loader2 : icons.Play"
+              [size]="16"
+              [class.spinning]="isExecuting()">
+            </lucide-icon>
+            {{ isExecuting() ? 'Running...' : 'Run' }}
           </button>
         </div>
       </div>
@@ -114,6 +145,7 @@ Output: [1,2]</code></pre>
           [language]="'javascript'"
           [initialCode]="initialCode"
           [height]="'100%'"
+          [theme]="selectedTheme()"
           (codeChange)="onCodeChange($event)">
         </mpe-monaco-editor>
 

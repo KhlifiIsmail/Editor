@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
   MonacoEditorComponent,
   PatternBadgeComponent,
@@ -14,22 +15,49 @@ import {
   Hint,
   HintLevel,
 } from 'monaco-pattern-editor';
+import {
+  LucideAngularModule,
+  Zap,
+  Sun,
+  Moon,
+  Target,
+  BarChart3,
+  Lightbulb,
+  Play,
+  Search,
+  Loader2,
+} from 'lucide-angular';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     MonacoEditorComponent,
     PatternBadgeComponent,
     ComplexityBadgeComponent,
     HintOverlayComponent,
     TestResultsComponent,
+    LucideAngularModule,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
+  // Lucide icons
+  readonly icons = {
+    Zap,
+    Sun,
+    Moon,
+    Target,
+    BarChart3,
+    Lightbulb,
+    Play,
+    Search,
+    Loader2,
+  };
+
   // State
   detectedPatterns = signal<Pattern[]>([]);
   complexity = signal<Complexity | null>(null);
@@ -40,6 +68,30 @@ export class App {
   isExecuting = signal(false);
   isDetecting = signal(false);
   currentCode = signal('');
+  selectedTheme = signal('obsidian-warmth');
+
+  // Available themes (split by dark/light)
+  darkThemes = [
+    { value: 'obsidian-warmth', label: 'Obsidian Warmth' },
+    { value: 'catppuccin-mocha', label: 'Catppuccin Mocha' },
+    { value: 'dracula', label: 'Dracula' },
+    { value: 'nord', label: 'Nord' },
+    { value: 'tokyo-night', label: 'Tokyo Night' },
+  ];
+
+  lightThemes = [
+    { value: 'obsidian-warmth', label: 'Obsidian Warmth' },
+    { value: 'catppuccin-latte', label: 'Catppuccin Latte' },
+    { value: 'github-light', label: 'GitHub Light' },
+    { value: 'rose-pine-dawn', label: 'Rosé Pine Dawn' },
+  ];
+
+  // Computed available themes based on current mode
+  get availableThemes() {
+    return this.themeService.currentMode() === 'dark'
+      ? this.darkThemes
+      : this.lightThemes;
+  }
 
   // Initial code sample
   initialCode = `// Two Sum - Classic Interview Problem
@@ -125,8 +177,13 @@ console.log(twoSum([2, 7, 11, 15], 9)); // [0, 1]`;
     this.currentHintLevel.set(level);
   }
 
-  // Toggle theme
+  // Toggle theme mode (dark/light)
   toggleTheme(): void {
     this.themeService.toggleMode();
+  }
+
+  // Change theme
+  onThemeChange(theme: string): void {
+    this.selectedTheme.set(theme);
   }
 }
