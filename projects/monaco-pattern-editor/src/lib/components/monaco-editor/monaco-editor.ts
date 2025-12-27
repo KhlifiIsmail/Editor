@@ -13,6 +13,10 @@ import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../theme/theme.service';
 import { Pattern } from '../../models/pattern.model';
 import { SupportedLanguage } from '../../models/test-result.model';
+import {
+  OBSIDIAN_WARMTH_MONACO_DARK,
+  OBSIDIAN_WARMTH_MONACO_LIGHT,
+} from '../../theme/monaco-themes/obsidian-warmth-monaco.theme';
 
 // Monaco types
 declare const monaco: any;
@@ -97,17 +101,22 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
+    // Define custom Obsidian Warmth themes
+    monaco.editor.defineTheme('obsidian-warmth-dark', OBSIDIAN_WARMTH_MONACO_DARK);
+    monaco.editor.defineTheme('obsidian-warmth-light', OBSIDIAN_WARMTH_MONACO_LIGHT);
+
     const mode = this.themeService.currentMode();
 
     this.editor = monaco.editor.create(this.editorContainer.nativeElement, {
       value: this.initialCode,
       language: this.language,
-      theme: mode === 'dark' ? 'vs-dark' : 'vs-light',
+      theme: mode === 'dark' ? 'obsidian-warmth-dark' : 'obsidian-warmth-light',
       readOnly: this.readOnly,
       fontSize: 14,
       fontFamily: 'JetBrains Mono, Fira Code, Cascadia Code, monospace',
       fontLigatures: true,
       lineHeight: 20,
+      letterSpacing: 0.5,
       minimap: {
         enabled: true,
       },
@@ -121,12 +130,23 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
       smoothScrolling: true,
       cursorBlinking: 'smooth',
       cursorSmoothCaretAnimation: 'on',
+      cursorStyle: 'line',
+      cursorWidth: 2,
       roundedSelection: true,
       selectOnLineNumbers: true,
       folding: true,
       foldingHighlight: true,
       bracketPairColorization: {
         enabled: true,
+      },
+      suggest: {
+        preview: true,
+        showIcons: true,
+      },
+      quickSuggestions: {
+        other: true,
+        comments: false,
+        strings: false,
       },
     });
 
@@ -144,7 +164,7 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
    */
   private updateEditorTheme(mode: 'dark' | 'light'): void {
     if (this.editor) {
-      monaco.editor.setTheme(mode === 'dark' ? 'vs-dark' : 'vs-light');
+      monaco.editor.setTheme(mode === 'dark' ? 'obsidian-warmth-dark' : 'obsidian-warmth-light');
     }
   }
 
