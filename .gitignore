@@ -41,10 +41,15 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
-.claude/*
+
+# Claude AI files
 .claude/
-/.claude/*
-/.claude/
+.claude/*
+
+# Documentation (markdown files)
+*.md
+!README.md
+!LICENSE
 
 
 
