@@ -1,0 +1,60 @@
+<div class="hint-overlay" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="hint-modal">
+    <!-- Header -->
+    <div class="hint-header">
+      <div class="hint-title">
+        <span class="hint-icon">💡</span>
+        <h3>Hint {{ currentLevel }} of {{ hints.length }}</h3>
+      </div>
+      <button class="close-button" (click)="onClose()" aria-label="Close">
+        ✕
+      </button>
+    </div>
+
+    <!-- Level Indicator -->
+    <div class="hint-level-indicator">
+      <div
+        *ngFor="let hint of hints; let i = index"
+        class="level-dot"
+        [class.active]="i + 1 === currentLevel"
+        [class.revealed]="i + 1 <= currentLevel">
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="hint-content" *ngIf="currentHint">
+      <p class="hint-text">{{ currentHint.content }}</p>
+
+      <!-- Code Snippet -->
+      <div class="hint-code" *ngIf="currentHint.codeSnippet">
+        <pre><code>{{ currentHint.codeSnippet }}</code></pre>
+      </div>
+
+      <!-- Diagram -->
+      <div class="hint-diagram" *ngIf="currentHint.diagram">
+        <img [src]="currentHint.diagram" alt="Hint diagram" />
+      </div>
+    </div>
+
+    <!-- Footer / Navigation -->
+    <div class="hint-footer">
+      <button
+        class="hint-button secondary"
+        (click)="onPreviousHint()"
+        [disabled]="!canGoPrevious">
+        ← Previous
+      </button>
+
+      <div class="hint-progress">
+        Level {{ currentLevel }} / {{ hints.length }}
+      </div>
+
+      <button
+        class="hint-button primary"
+        (click)="onNextHint()"
+        [disabled]="!canGoNext">
+        Next →
+      </button>
+    </div>
+  </div>
+</div>
