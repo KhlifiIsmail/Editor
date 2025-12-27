@@ -1,0 +1,8 @@
+<div class="complexity-badge" [class.compact]="compact">
+  <span class="complexity-label" *ngIf="!compact">
+    {{ type === 'time' ? 'Time' : 'Space' }}:
+  </span>
+  <span class="complexity-value">
+    {{ type === 'time' ? complexity.time : complexity.space }}
+  </span>
+</div>

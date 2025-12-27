@@ -1,0 +1,56 @@
+/**
+ * Complexity Badge Component
+ * Compact badge for O(n) notation
+ */
+
+.complexity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mpe-space-xs);
+  padding: 4px var(--mpe-space-sm);
+  height: 24px;
+  border-radius: var(--mpe-radius-sm);
+  background: var(--mpe-color-bg-tertiary);
+  border: 1px solid var(--mpe-color-accent-secondary);
+  font-family: var(--mpe-font-code);
+  transition: all var(--mpe-duration-quick) var(--mpe-ease-smooth);
+
+  // Hover effect
+  &:hover {
+    border-color: var(--mpe-color-accent-primary);
+    box-shadow: var(--mpe-elevation-1);
+  }
+
+  // Compact mode - smaller, icon-like
+  &.compact {
+    padding: 2px 6px;
+    height: 20px;
+  }
+}
+
+// Label (Time/Space)
+.complexity-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--mpe-color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Value (O(n), O(n²), etc.)
+.complexity-value {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mpe-color-accent-primary);
+
+  .compact & {
+    font-size: 10px;
+  }
+}
+
+// Respect reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .complexity-badge {
+    transition: none !important;
+  }
+}
