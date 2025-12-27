@@ -1,0 +1,151 @@
+/**
+ * Monaco Editor Component Styles
+ * Premium, smooth, Apple-like design
+ */
+
+.monaco-editor-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--mpe-radius-md);
+  overflow: hidden;
+  background-color: var(--mpe-color-bg-secondary);
+  box-shadow: var(--mpe-elevation-3);
+  transition: box-shadow var(--mpe-duration-standard) var(--mpe-ease-smooth);
+
+  // Subtle hover effect
+  &:hover {
+    box-shadow: var(--mpe-elevation-4);
+  }
+
+  // Premium focus glow
+  &:focus-within {
+    box-shadow: 0 0 0 3px var(--mpe-color-pattern-glow),
+                var(--mpe-elevation-4);
+  }
+}
+
+.editor-container {
+  width: 100%;
+  position: relative;
+
+  // Ensure Monaco renders properly
+  :host ::ng-deep {
+    .monaco-editor {
+      // Override Monaco's default fonts to use our theme
+      .view-lines {
+        font-family: var(--mpe-font-code) !important;
+      }
+
+      // Smooth cursor animation
+      .cursor {
+        transition: all var(--mpe-duration-quick) var(--mpe-ease-smooth);
+      }
+
+      // Pattern highlight styling
+      .pattern-highlight {
+        background-color: var(--mpe-color-pattern-glow);
+        border-left: 3px solid var(--mpe-color-accent-primary);
+        animation: patternFadeIn var(--mpe-duration-slow) var(--mpe-ease-smooth);
+      }
+
+      // Pattern glyph margin
+      .pattern-glyph {
+        background: var(--mpe-color-accent-primary);
+        width: 4px !important;
+        margin-left: 4px;
+        border-radius: var(--mpe-radius-pill);
+        animation: glyphPulse 2s var(--mpe-ease-smooth) infinite;
+      }
+
+      // Smooth scrollbar
+      .monaco-scrollable-element > .scrollbar {
+        transition: opacity var(--mpe-duration-standard) var(--mpe-ease-smooth);
+
+        &:hover {
+          opacity: 1 !important;
+        }
+      }
+
+      // Premium selection color
+      .selected-text {
+        background-color: var(--mpe-color-accent-primary) !important;
+        color: var(--mpe-color-bg-primary) !important;
+      }
+    }
+  }
+}
+
+// Keyframe animations
+@keyframes patternFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glyphPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 4px var(--mpe-color-accent-primary);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 8px var(--mpe-color-accent-primary);
+  }
+}
+
+// Loading state (for when Monaco is loading)
+.editor-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: var(--mpe-color-bg-secondary);
+  color: var(--mpe-color-text-secondary);
+  font-family: var(--mpe-font-ui);
+  font-size: 14px;
+
+  &::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    margin-left: var(--mpe-space-sm);
+    border: 2px solid var(--mpe-color-accent-primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .monaco-editor-wrapper {
+    border-radius: var(--mpe-radius-sm);
+  }
+
+  :host ::ng-deep .monaco-editor {
+    .view-lines {
+      font-size: 12px !important;
+    }
+  }
+}
+
+// Respect reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .monaco-editor-wrapper,
+  .editor-container,
+  :host ::ng-deep .monaco-editor * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
