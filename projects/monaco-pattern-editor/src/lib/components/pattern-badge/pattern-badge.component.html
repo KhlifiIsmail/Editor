@@ -1,0 +1,14 @@
+<div
+  class="pattern-badge"
+  [class.animated]="animated"
+  [attr.data-confidence]="pattern.confidence >= 90 ? 'high' : pattern.confidence >= 70 ? 'medium' : 'low'">
+
+  <span class="pattern-icon">🎯</span>
+
+  <div class="pattern-info">
+    <span class="pattern-type">{{ pattern.type }}</span>
+    <span class="pattern-confidence">{{ pattern.confidence }}%</span>
+  </div>
+
+  <div class="pattern-glow"></div>
+</div>

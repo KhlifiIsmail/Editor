@@ -1,0 +1,171 @@
+/**
+ * Pattern Badge Component
+ * Premium pill-shaped badge with glow effect
+ */
+
+.pattern-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mpe-space-sm);
+  padding: var(--mpe-space-sm) var(--mpe-space-md);
+  height: 32px;
+  border-radius: var(--mpe-radius-pill);
+  background: var(--mpe-color-bg-secondary);
+  border: 1px solid var(--mpe-color-accent-secondary);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--mpe-elevation-1);
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+
+  transition: all var(--mpe-duration-standard) var(--mpe-ease-smooth);
+
+  // Hover effect
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mpe-elevation-2);
+    border-color: var(--mpe-color-accent-primary);
+
+    .pattern-glow {
+      opacity: 0.3;
+    }
+  }
+
+  // Active/pressed effect
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--mpe-elevation-1);
+  }
+
+  // Animated entrance
+  &.animated {
+    animation: badgeFadeIn var(--mpe-duration-slow) var(--mpe-ease-smooth);
+  }
+}
+
+// Confidence-based styling
+.pattern-badge[data-confidence="high"] {
+  border-color: var(--mpe-color-success);
+
+  .pattern-glow {
+    background: radial-gradient(
+      circle,
+      var(--mpe-color-success) 0%,
+      transparent 70%
+    );
+  }
+}
+
+.pattern-badge[data-confidence="medium"] {
+  border-color: var(--mpe-color-warning);
+
+  .pattern-glow {
+    background: radial-gradient(
+      circle,
+      var(--mpe-color-warning) 0%,
+      transparent 70%
+    );
+  }
+}
+
+.pattern-badge[data-confidence="low"] {
+  border-color: var(--mpe-color-info);
+
+  .pattern-glow {
+    background: radial-gradient(
+      circle,
+      var(--mpe-color-info) 0%,
+      transparent 70%
+    );
+  }
+}
+
+// Icon
+.pattern-icon {
+  font-size: 16px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px var(--mpe-color-shadow));
+}
+
+// Pattern info container
+.pattern-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+// Pattern type text
+.pattern-type {
+  font-family: var(--mpe-font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--mpe-color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Confidence percentage
+.pattern-confidence {
+  font-family: var(--mpe-font-code);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--mpe-color-accent-primary);
+  opacity: 0.8;
+}
+
+// Glow effect
+.pattern-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  pointer-events: none;
+  transition: opacity var(--mpe-duration-standard) var(--mpe-ease-smooth);
+  background: radial-gradient(
+    circle,
+    var(--mpe-color-accent-primary) 0%,
+    transparent 70%
+  );
+  animation: glowPulse 3s var(--mpe-ease-smooth) infinite;
+}
+
+// Animations
+@keyframes badgeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+// Respect reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .pattern-badge,
+  .pattern-glow {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .pattern-badge:hover {
+    transform: none;
+  }
+}
