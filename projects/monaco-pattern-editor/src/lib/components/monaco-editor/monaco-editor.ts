@@ -17,6 +17,10 @@ import {
   OBSIDIAN_WARMTH_MONACO_DARK,
   OBSIDIAN_WARMTH_MONACO_LIGHT,
 } from '../../theme/monaco-themes/obsidian-warmth-monaco.theme';
+import { CATPPUCCIN_MOCHA_MONACO } from '../../theme/monaco-themes/catppuccin-mocha.theme';
+import { DRACULA_MONACO } from '../../theme/monaco-themes/dracula.theme';
+import { NORD_MONACO } from '../../theme/monaco-themes/nord.theme';
+import { TOKYO_NIGHT_MONACO } from '../../theme/monaco-themes/tokyo-night.theme';
 
 // Monaco types
 declare const monaco: any;
@@ -37,6 +41,7 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
   @Input() readOnly: boolean = false;
   @Input() height: string = '600px';
   @Input() patterns: Pattern[] = [];
+  @Input() theme: string = 'obsidian-warmth'; // Theme name
 
   @Output() codeChange = new EventEmitter<string>();
   @Output() editorReady = new EventEmitter<any>();
@@ -101,16 +106,21 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // Define custom Obsidian Warmth themes
+    // Define all custom themes
     monaco.editor.defineTheme('obsidian-warmth-dark', OBSIDIAN_WARMTH_MONACO_DARK);
     monaco.editor.defineTheme('obsidian-warmth-light', OBSIDIAN_WARMTH_MONACO_LIGHT);
+    monaco.editor.defineTheme('catppuccin-mocha', CATPPUCCIN_MOCHA_MONACO);
+    monaco.editor.defineTheme('dracula', DRACULA_MONACO);
+    monaco.editor.defineTheme('nord', NORD_MONACO);
+    monaco.editor.defineTheme('tokyo-night', TOKYO_NIGHT_MONACO);
 
     const mode = this.themeService.currentMode();
+    const themeName = this.getThemeName();
 
     this.editor = monaco.editor.create(this.editorContainer.nativeElement, {
       value: this.initialCode,
       language: this.language,
-      theme: mode === 'dark' ? 'obsidian-warmth-dark' : 'obsidian-warmth-light',
+      theme: themeName,
       readOnly: this.readOnly,
       fontSize: 14,
       fontFamily: 'JetBrains Mono, Fira Code, Cascadia Code, monospace',
@@ -160,11 +170,27 @@ export class MonacoEditorComponent implements AfterViewInit, OnDestroy {
   }
 
   /**
+   * Get theme name based on theme input and current mode
+   */
+  private getThemeName(): string {
+    const mode = this.themeService.currentMode();
+
+    // Only obsidian-warmth has light/dark variants
+    if (this.theme === 'obsidian-warmth') {
+      return mode === 'dark' ? 'obsidian-warmth-dark' : 'obsidian-warmth-light';
+    }
+
+    // Other themes are dark only
+    return this.theme;
+  }
+
+  /**
    * Update editor theme based on current theme mode
    */
   private updateEditorTheme(mode: 'dark' | 'light'): void {
     if (this.editor) {
-      monaco.editor.setTheme(mode === 'dark' ? 'obsidian-warmth-dark' : 'obsidian-warmth-light');
+      const themeName = this.getThemeName();
+      monaco.editor.setTheme(themeName);
     }
   }
 
