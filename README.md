@@ -1,47 +1,35 @@
 # Monaco Pattern Editor
 
-A premium Angular library that wraps Monaco Editor (VS Code's editor) with beautiful themes, pattern detection UI, and coding interview preparation features.
+> A premium Angular library that wraps Monaco Editor with beautiful themes and coding interview preparation features.
+
+[![npm version](https://img.shields.io/npm/v/@khlifiismail/monaco-pattern-editor.svg)](https://www.npmjs.com/package/@khlifiismail/monaco-pattern-editor)
+[![license](https://img.shields.io/npm/l/@khlifiismail/monaco-pattern-editor.svg)](https://github.com/KhlifiIsmail/Editor/blob/main/LICENSE)
 
 ## Features
 
-✨ **Premium Monaco Themes** - 9 carefully crafted themes for dark and light modes
-🎨 **Smooth Animations** - Apple-inspired smooth transitions and effects
-🎯 **Pattern Detection UI** - Visual feedback for coding patterns
-📊 **Complexity Analysis** - Big-O notation badges
-💡 **Progressive Hints** - Multi-level hint system
-✅ **Test Results** - Beautiful test execution results panel
-🌓 **Dark/Light Mode** - Full theme switching support
-📦 **Standalone Components** - Works with Angular standalone apps
-🚀 **Zero Configuration** - Works out of the box
-
-## Themes
-
-### Dark Themes
-- **Obsidian Warmth Dark** - Warm, cozy dark theme (default)
-- **Catppuccin Mocha** - Pastel dark theme with warm colors
-- **Dracula** - Vibrant purple dark theme
-- **Nord** - Arctic, north-bluish color palette
-- **Tokyo Night** - Neon-inspired dark theme
-
-### Light Themes
-- **Obsidian Warmth Light** - Warm light variant
-- **Catppuccin Latte** - Soothing light theme with pastels
-- **GitHub Light** - Clean, professional light theme
-- **Rosé Pine Dawn** - Elegant low-contrast light theme
+- **9 Premium Themes** - Carefully crafted dark and light themes
+- **Smooth Animations** - Apple-inspired transitions
+- **Pattern Detection UI** - Visual coding pattern feedback
+- **Complexity Analysis** - Big-O notation badges
+- **Progressive Hints** - Multi-level hint system
+- **Test Results Panel** - Beautiful execution results
+- **Dark/Light Mode** - Full theme switching
+- **Standalone Components** - Works with modern Angular
+- **Zero Configuration** - Works out of the box
 
 ## Installation
 
 ```bash
-npm install monaco-pattern-editor
+npm install @khlifiismail/monaco-pattern-editor
 ```
 
 ## Quick Start
 
-### 1. Import the Module
+**1. Import the component:**
 
 ```typescript
 import { Component } from '@angular/core';
-import { MonacoEditorComponent } from 'monaco-pattern-editor';
+import { MonacoEditorComponent } from '@khlifiismail/monaco-pattern-editor';
 
 @Component({
   selector: 'app-root',
@@ -60,294 +48,153 @@ import { MonacoEditorComponent } from 'monaco-pattern-editor';
 export class AppComponent {
   code = 'console.log("Hello World!");';
 
-  onCodeChange(newCode: string) {
-    console.log('Code changed:', newCode);
+  onCodeChange(code: string) {
+    console.log('Code changed:', code);
   }
 }
 ```
 
-### 2. Add Global Styles
-
-In your `styles.scss`:
+**2. Add styles to `styles.scss`:**
 
 ```scss
-@import 'monaco-pattern-editor/styles/theme.scss';
+@import '@khlifiismail/monaco-pattern-editor/styles/theme.scss';
 ```
 
-## Components
+**3. Run your app:**
+
+```bash
+ng serve
+```
+
+That's it! The Monaco editor will load automatically.
+
+## Themes
+
+### Dark Themes
+- `obsidian-warmth` - Warm, cozy dark theme (default)
+- `catppuccin-mocha` - Pastel dark with warm colors
+- `dracula` - Vibrant purple theme
+- `nord` - Arctic bluish palette
+- `tokyo-night` - Neon-inspired dark
+
+### Light Themes
+- `catppuccin-latte` - Soothing pastel light
+- `github-light` - Clean professional light
+- `rose-pine-dawn` - Elegant low-contrast
+
+## API Reference
 
 ### MonacoEditorComponent
 
-The main editor component.
+#### Inputs
 
-**Inputs:**
-- `language: SupportedLanguage` - Programming language (default: 'javascript')
-- `initialCode: string` - Initial code content (default: '')
-- `readOnly: boolean` - Make editor read-only (default: false)
-- `height: string` - Editor height (default: '600px')
-- `theme: string` - Theme name (default: 'obsidian-warmth')
-- `patterns: Pattern[]` - Patterns to highlight (default: [])
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `language` | `SupportedLanguage` | `'javascript'` | Programming language |
+| `initialCode` | `string` | `''` | Initial code content |
+| `readOnly` | `boolean` | `false` | Read-only mode |
+| `height` | `string` | `'600px'` | Editor height |
+| `theme` | `string` | `'obsidian-warmth'` | Theme name |
+| `patterns` | `Pattern[]` | `[]` | Patterns to highlight |
 
-**Outputs:**
-- `codeChange: EventEmitter<string>` - Emits when code changes
-- `editorReady: EventEmitter<any>` - Emits when editor is initialized
+#### Outputs
 
-**Methods:**
-- `getValue(): string` - Get current editor value
-- `setValue(value: string): void` - Set editor value
-- `focus(): void` - Focus the editor
-- `highlightPattern(pattern: Pattern): void` - Highlight a pattern
-- `clearPatternHighlights(): void` - Clear all highlights
+| Output | Type | Description |
+|--------|------|-------------|
+| `codeChange` | `EventEmitter<string>` | Emits when code changes |
+| `editorReady` | `EventEmitter<any>` | Emits when editor initializes |
 
-### PatternBadgeComponent
+#### Methods
 
-Display detected coding patterns.
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `getValue()` | `string` | Get current code |
+| `setValue(value: string)` | `void` | Set code value |
+| `focus()` | `void` | Focus the editor |
 
-```typescript
-import { PatternBadgeComponent, Pattern } from 'monaco-pattern-editor';
+### Supported Languages
 
-// In template:
-<mpe-pattern-badge
-  [pattern]="pattern"
-  [animated]="true">
-</mpe-pattern-badge>
-```
+`'javascript'` | `'typescript'` | `'python'` | `'java'` | `'cpp'` | `'csharp'`
 
-### ComplexityBadgeComponent
+## Examples
 
-Show Big-O complexity.
+### Theme Switching
 
 ```typescript
-import { ComplexityBadgeComponent, Complexity } from 'monaco-pattern-editor';
-
-// In template:
-<mpe-complexity-badge
-  [complexity]="complexity"
-  [type]="'time'">
-</mpe-complexity-badge>
-```
-
-### TestResultsComponent
-
-Display test execution results.
-
-```typescript
-import { TestResultsComponent, ExecutionResult } from 'monaco-pattern-editor';
-
-// In template:
-<mpe-test-results
-  [result]="executionResult"
-  [loading]="false">
-</mpe-test-results>
-```
-
-### HintOverlayComponent
-
-Progressive hint system.
-
-```typescript
-import { HintOverlayComponent, Hint } from 'monaco-pattern-editor';
-
-// In template:
-<mpe-hint-overlay
-  [hints]="hints"
-  [isOpen]="true"
-  [currentLevel]="1"
-  (close)="onClose()"
-  (nextHint)="onNext($event)"
-  (previousHint)="onPrevious($event)">
-</mpe-hint-overlay>
-```
-
-## Theme Service
-
-Switch themes programmatically:
-
-```typescript
-import { ThemeService } from 'monaco-pattern-editor';
-
-constructor(private themeService: ThemeService) {}
-
-// Toggle dark/light mode
-this.themeService.toggleMode();
-
-// Get current mode
-const mode = this.themeService.currentMode(); // 'dark' | 'light'
-
-// Apply specific theme profile
-this.themeService.applyTheme('obsidian-warmth');
-```
-
-## Switching Editor Themes
-
-Change the Monaco editor theme dynamically:
-
-```typescript
-// In your component:
-selectedTheme = 'catppuccin-mocha';
-
-// In template:
-<mpe-monaco-editor
-  [theme]="selectedTheme">
-</mpe-monaco-editor>
-
-// Change theme
-changeTheme(newTheme: string) {
-  this.selectedTheme = newTheme;
-}
-```
-
-Available theme values:
-- Dark: `'obsidian-warmth'`, `'catppuccin-mocha'`, `'dracula'`, `'nord'`, `'tokyo-night'`
-- Light: `'obsidian-warmth'`, `'catppuccin-latte'`, `'github-light'`, `'rose-pine-dawn'`
-
-## Advanced Usage
-
-### Complete Example with All Features
-
-```typescript
-import { Component, signal, ViewChild } from '@angular/core';
-import {
-  MonacoEditorComponent,
-  PatternBadgeComponent,
-  TestResultsComponent,
-  ThemeService,
-  Pattern,
-  ExecutionResult,
-} from 'monaco-pattern-editor';
+import { Component, signal } from '@angular/core';
+import { MonacoEditorComponent } from '@khlifiismail/monaco-pattern-editor';
 
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [
-    MonacoEditorComponent,
-    PatternBadgeComponent,
-    TestResultsComponent,
-  ],
+  imports: [MonacoEditorComponent],
   template: `
-    <div class="editor-container">
-      <!-- Theme Switcher -->
-      <select [(ngModel)]="selectedTheme">
-        <option value="obsidian-warmth">Obsidian Warmth</option>
-        <option value="catppuccin-mocha">Catppuccin Mocha</option>
-        <option value="dracula">Dracula</option>
-      </select>
+    <select [(ngModel)]="theme">
+      <option value="obsidian-warmth">Obsidian Warmth</option>
+      <option value="dracula">Dracula</option>
+      <option value="nord">Nord</option>
+    </select>
 
-      <!-- Editor -->
-      <mpe-monaco-editor
-        #editor
-        [language]="'javascript'"
-        [initialCode]="code"
-        [theme]="selectedTheme"
-        [height]="'600px'"
-        (codeChange)="onCodeChange($event)"
-        (editorReady)="onEditorReady($event)">
-      </mpe-monaco-editor>
+    <mpe-monaco-editor
+      [theme]="theme"
+      [language]="'javascript'"
+      [height]="'500px'">
+    </mpe-monaco-editor>
+  `
+})
+export class EditorComponent {
+  theme = 'obsidian-warmth';
+}
+```
 
-      <!-- Patterns -->
-      <div *ngIf="detectedPatterns().length > 0">
-        <mpe-pattern-badge
-          *ngFor="let pattern of detectedPatterns()"
-          [pattern]="pattern">
-        </mpe-pattern-badge>
-      </div>
+### With Dark/Light Mode
 
-      <!-- Test Results -->
-      <mpe-test-results
-        *ngIf="testResults()"
-        [result]="testResults()!"
-        [loading]="isExecuting()">
-      </mpe-test-results>
-    </div>
+```typescript
+import { Component } from '@angular/core';
+import { MonacoEditorComponent, ThemeService } from '@khlifiismail/monaco-pattern-editor';
+
+@Component({
+  selector: 'app-editor',
+  standalone: true,
+  imports: [MonacoEditorComponent],
+  template: `
+    <button (click)="themeService.toggleMode()">
+      Toggle Mode
+    </button>
+
+    <mpe-monaco-editor
+      [language]="'typescript'"
+      [height]="'600px'">
+    </mpe-monaco-editor>
+  `
+})
+export class EditorComponent {
+  constructor(public themeService: ThemeService) {}
+}
+```
+
+### Getting Editor Value
+
+```typescript
+import { Component, ViewChild } from '@angular/core';
+import { MonacoEditorComponent } from '@khlifiismail/monaco-pattern-editor';
+
+@Component({
+  selector: 'app-editor',
+  standalone: true,
+  imports: [MonacoEditorComponent],
+  template: `
+    <mpe-monaco-editor #editor [height]="'500px'"></mpe-monaco-editor>
+    <button (click)="getCode()">Get Code</button>
   `
 })
 export class EditorComponent {
   @ViewChild('editor') editor!: MonacoEditorComponent;
 
-  selectedTheme = 'obsidian-warmth';
-  code = 'function hello() { return "world"; }';
-  detectedPatterns = signal<Pattern[]>([]);
-  testResults = signal<ExecutionResult | null>(null);
-  isExecuting = signal(false);
-
-  constructor(public themeService: ThemeService) {}
-
-  onCodeChange(newCode: string) {
-    // Handle code changes
+  getCode() {
+    const code = this.editor.getValue();
+    console.log(code);
   }
-
-  onEditorReady(editor: any) {
-    // Editor is ready
-    this.editor.focus();
-  }
-}
-```
-
-## Types
-
-```typescript
-// Pattern
-interface Pattern {
-  type: string;
-  confidence: number;
-  lineStart: number;
-  lineEnd: number;
-  description: string;
-  examples: string[];
-}
-
-// Complexity
-interface Complexity {
-  value: string;
-  description: string;
-}
-
-// Test Result
-interface TestCase {
-  input: any;
-  expectedOutput: any;
-  actualOutput?: any;
-  passed: boolean;
-  error?: string;
-}
-
-interface ExecutionResult {
-  testCases: TestCase[];
-  executionTime: number;
-  memoryUsed: number;
-  consoleOutput?: string[];
-}
-
-// Hint
-interface Hint {
-  level: 1 | 2 | 3 | 4;
-  content: string;
-  revealed: boolean;
-}
-
-// Supported Languages
-type SupportedLanguage =
-  | 'javascript'
-  | 'typescript'
-  | 'python'
-  | 'java'
-  | 'cpp'
-  | 'csharp';
-```
-
-## Design Tokens
-
-The library uses CSS custom properties for theming. You can override them:
-
-```scss
-:root {
-  --mpe-color-accent-primary: #D4A574;
-  --mpe-color-accent-secondary: #C69668;
-  --mpe-color-success: #7FB069;
-  --mpe-color-error: #D16666;
-  --mpe-color-warning: #E4A853;
-  --mpe-font-code: 'JetBrains Mono', 'Fira Code', monospace;
-  --mpe-font-ui: 'Inter', system-ui, sans-serif;
 }
 ```
 
@@ -365,7 +212,7 @@ The library uses CSS custom properties for theming. You can override them:
 
 ## Demo
 
-Check out the demo app in the repository:
+Clone and run the demo:
 
 ```bash
 git clone https://github.com/KhlifiIsmail/Editor.git
@@ -374,38 +221,39 @@ npm install
 ng serve demo
 ```
 
-Open `http://localhost:4200`
+Open http://localhost:4200
 
 ## Contributing
 
-Contributions are welcome! Please read our contributing guidelines.
+Contributions welcome!
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork the repo
+2. Create branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'feat: add feature'`
+4. Push: `git push origin feature/amazing-feature`
+5. Open Pull Request
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT License - see [LICENSE](LICENSE) file
 
 ## Author
 
-**Ismail Khlifi** - [GitHub Profile](https://github.com/KhlifiIsmail)
-
-## Acknowledgments
-
-- Monaco Editor by Microsoft
-- Inspired by LeetCode, CodeForces, and coding interview platforms
-- Theme inspirations: Catppuccin, Dracula, Nord, Tokyo Night, Rosé Pine
+**Ismail Khlifi**
+- GitHub: [@KhlifiIsmail](https://github.com/KhlifiIsmail)
+- Email: ismail.khliffi@gmail.com
 
 ## Support
 
-- 🐛 [Report Bug](https://github.com/KhlifiIsmail/Editor/issues)
-- 💡 [Request Feature](https://github.com/KhlifiIsmail/Editor/issues)
-- 📧 [Contact](mailto:ismail.khliffi@gmail.com)
+- [Report Bug](https://github.com/KhlifiIsmail/Editor/issues)
+- [Request Feature](https://github.com/KhlifiIsmail/Editor/issues)
+
+## Acknowledgments
+
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/) by Microsoft
+- Theme inspirations: Catppuccin, Dracula, Nord, Tokyo Night, Rosé Pine
+- Inspired by LeetCode and coding interview platforms
 
 ---
 
-Made with ❤️ for developers preparing for coding interviews
+Made with care for developers preparing for coding interviews
